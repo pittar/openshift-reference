@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       ...
-      serviceAccountName: ckan
+      serviceAccountName: specialaccount
 ```
 
 
