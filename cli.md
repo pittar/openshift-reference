@@ -1,5 +1,12 @@
 # CLI Cheat Sheet
 
+## New Project with NodeSelector
+
+```
+oc adm new-project myproject \
+    --node-selector='label.key=label.value'
+```
+
 ## Serivce Accounts
 
 Create service accounts and apply roles or scc:
