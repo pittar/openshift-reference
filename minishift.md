@@ -31,3 +31,16 @@ $ minishift addons enable registry-route
 ```
 
 I do **not** suggest adding `anyuid`.  If you really need to run a pod with anyuid, create a [service account](cli.md) with `anyuid` and run your pod with that service account.
+
+## Adding Java s2i
+
+For some reason, Java s2i is not present in Minishift.  Here's how to add it.
+
+First, pull the s2i image.  As an admin:
+
+```
+$ oc project openshift
+$ oc import-image redhat-openjdk18-openshift --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift --confirm
+$ oc tag redhat-openjdk18-openshift:latest redhat-openjdk18-openshift:1.4
+$ oc apply -f templates/java-s2i.yaml
+```
