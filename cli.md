@@ -36,3 +36,11 @@ oc get dc <dc name> -o yaml -n <project> | sed 's/automatic: true/automatic: fal
 ```
 oc get bc/<build name> -o=jsonpath='{.spec.triggers..github.secret}{"\n"}'
 ```
+
+To get the Webhook URL:
+
+```
+oc describe bc/<build name>
+```
+
+Then look for `Webhook Github:` and copy the `URL:`.  You will have to replace `<secret>` with the secret you retrieved in the first step.
