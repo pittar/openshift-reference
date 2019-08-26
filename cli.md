@@ -44,3 +44,11 @@ oc describe bc/<build name>
 ```
 
 Then look for `Webhook Github:` and copy the `URL:`.  You will have to replace `<secret>` with the secret you retrieved in the first step.
+
+## Set Environment Variable
+
+You can easily set an env var on a deployment config from the cli:
+
+```
+oc set env dc/<dc name> key=value
+```
