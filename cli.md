@@ -30,3 +30,9 @@ $ oc adm policy add-role-to-user edit -z cicd
 ```
 oc get dc <dc name> -o yaml -n <project> | sed 's/automatic: true/automatic: false/g' | oc replace -f -
 ```
+
+## Get GitHub Webhook Trigger Secret
+
+```
+oc get bc/<build name> -o=jsonpath='{.spec.triggers..github.secret}{"\n"}'
+```
