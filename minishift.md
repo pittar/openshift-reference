@@ -1,5 +1,7 @@
 # Minishift Cheat Sheet
 
+**Minishift is for OpenShift 3.11.  For OpenShift 4.x, [please use CodeReady Containers](https://developers.redhat.com/products/codeready-containers/overview)
+
 ## Minishift Docs
 
 The latest Minishift documentation [can be found here](https://docs.okd.io/latest/minishift/).
