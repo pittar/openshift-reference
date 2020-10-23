@@ -4,7 +4,7 @@
 
 Export a "clean" reasource that doesn't have all of the fields specific to that particular instance.
 
-`**oc-export**`
+**`oc-export`**
 
 ```
 #!/bin/bash
@@ -23,5 +23,5 @@ oc get $1 $2 -o yaml \
 
 Usage:
 ```
-oc export service myapp > myapp-service.yaml
+oc-export service myapp > myapp-service.yaml
 ```
