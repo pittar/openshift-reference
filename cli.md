@@ -52,3 +52,9 @@ You can easily set an env var on a deployment config from the cli:
 ```
 oc set env dc/<dc name> key=value
 ```
+
+## OpenShift 4 - Expose Image Registry On Custom Route
+
+```
+oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"routes":[{"name":"public-routes","hostname":"registry.apps.<cluster url>"}]}}' --type=merge
+```
