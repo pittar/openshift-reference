@@ -27,3 +27,11 @@ oc create configmap <configmap name> \
 ```
 
 You will now have a `ConfigMap` in your project with an entry for each file, where the "filename" is the key, and the contents are the value.
+
+Back to the original example of two files in the same directory that we are running `oc` from called "application.properties" and "values.txt", the command would be:
+
+```
+oc create configmap custom-config \
+  --from-file=application.properties \
+  --from-file=values.txt
+```
