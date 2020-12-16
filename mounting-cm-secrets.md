@@ -35,3 +35,76 @@ oc create configmap custom-config \
   --from-file=application.properties \
   --from-file=values.txt
 ```
+
+## Mounting ConfigMap as a Volume
+
+Now that you have your `ConfigMap`, it's time to mount it as a volume.
+
+In your `Deployment` of `DeploymentConfig`, add a new `volume` to your pod template spec.  This example has an `emptyDir` volume for data (who wants to keep their data anyway?) and another volume that references the `ConfigMap`:
+
+```
+    spec:
+      volumes:
+        - name: data-volume
+          emptyDir: {}
+        - name: config-volume
+          configMap:
+            name: custom-config
+            defaultMode: 420
+```
+
+Then, in the container stanza of the pod spec, you mount the volume to a well known location:
+
+```
+          volumeMounts:
+            - name: data-volume
+              mountPath: /var/lib/pgsql/data
+            - name: config-volume
+              mountPath: /opt/app-root/src/custom-config
+```
+
+Once your pod restarts, you will your files in the specified directory:
+
+```
+$ ls -l /opt/app-root/src/custom-config
+application.properties
+values.txt
+```
+
+A more fleshed out example of a `DeploymentConfig` (with some boiler place yaml deleted for brevity) with a mounted ConfigMap:
+
+```
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: custompg
+spec:
+  selector:
+    name: custompg
+  template:
+    metadata:
+      labels:
+        name: custompg
+    spec:
+      containers:
+        - name: postgresql
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: custompg-data
+              mountPath: /var/lib/pgsql/data
+            - name: config-volume
+              mountPath: /opt/app-root/src/postgresql-start
+          terminationMessagePolicy: File
+      volumes:
+        - name: custompg-data
+          emptyDir: {}
+        - name: config-volume
+          configMap:
+            name: pg-config
+            defaultMode: 420
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+```
