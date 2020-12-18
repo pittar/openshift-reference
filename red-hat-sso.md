@@ -22,5 +22,6 @@ Next, install Red Hat SSO using the template.  You can do this through the GUI, 
 
 ```
 $ oc new-app --template=sso74-ocp4-x509-postgresql-persistent \
-  -P 
+  -p SSO_ADMIN_USERNAME=admin \
+  -p SSO_ADMIN_PASSWORD=password
 ```
