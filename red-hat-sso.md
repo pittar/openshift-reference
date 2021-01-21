@@ -25,3 +25,24 @@ $ oc new-app --template=sso74-ocp4-x509-postgresql-persistent \
   -p SSO_ADMIN_USERNAME=admin \
   -p SSO_ADMIN_PASSWORD=password
 ```
+
+### Create an OpenShift Realm and Client
+
+The name of the Realm and Client can be whatever you like, as long as you are consistent in their use for the rest of the steps.
+
+#### 1. Login to Red Hat SSO
+
+Login to your new Red Hat SSO instance with the default username/password that you passed into the template.  It's a good idea to change this as soon as you login for the firs time.
+
+#### 2. Create A New Realm
+
+From the Admin console, create a new **Realm**:
+* Hover over Realm drop-down list at the top-right of the screen.  It will say `Master` and have a down arrow beside it.
+* Click the blue `Add realm` button that appears.
+* Enter your realm name (e.g. `openshift`).  Leave all defaults in place and click **Create**.
+
+#### 3. Create A New Client
+
+You should now be in your new Realm (the name will be reflected at the top of the left navigation panel).
+
+* From the left navigation, click `Clients`
