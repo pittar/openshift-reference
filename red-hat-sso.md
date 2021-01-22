@@ -111,7 +111,6 @@ From the OpenShift Admin console:
 For example, if you ONLY have Red Hat SSO, your OAuth resource might look like:
 
 ```
-
 apiVersion: config.openshift.io/v1
 kind: OAuth
 metadata:
