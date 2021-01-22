@@ -52,6 +52,29 @@ You should now be in your new Realm (the name will be reflected at the top of th
 * Change `Access Type` to **confidential**.
 * Set the `Valid Redirect URIs` to `https://oauth-openshift.apps.<cluster url>/oauth2callback/rhsso`
 * **Save**
+* Click on the `Credentials` tab at the top of the screen that has now appeared.
+* Copy the `Secret`.  You will need it in the next step.
+
+#### 4. Create a Client Secret
+
+Create a Secret to hold the new client secret.
+
+For example: `client-secret.yaml`
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: openid-client-secret
+  namespace: openshift-config
+type: Opaque
+stringData:
+  clientSecret: <client secret>
+```
+
+Then apply it:
+```
+$ oc create -f client-secret.yaml -n openshift-config
+```
 
 #### 4. Create Ingress Secret
 
