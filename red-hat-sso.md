@@ -103,32 +103,32 @@ From the OpenShift Admin console:
 * Add the following to the `identityProvider:` list:
 
 ```
-  - name: rhsso
-    mappingMethod: claim
-    type: OpenID
-    openID:
-      clientID: openshift
-      clientSecret: 
-        name: openid-client-secret
-      ca: 
-        name: openidcacrt
-      extraScopes: 
-      - email
-      - profile
-      extraAuthorizeParameters: 
-        include_granted_scopes: "true"
-      claims:
-        preferredUsername: 
-        - preferred_username
+    - name: rhsso
+      mappingMethod: claim
+      type: OpenID
+      openID:
+        clientID: openshift
+        clientSecret: 
+          name: openid-client-secret
+        ca: 
+          name: openidcacrt
+        extraScopes: 
         - email
-        name: 
-        - nickname
-        - given_name
-        - name
-        email: 
-        - custom_email_claim
-        - email
-      issuer: https://sso-rh-sso.apps.<cluster url>/auth/realms/openshift
+        - profile
+        extraAuthorizeParameters: 
+          include_granted_scopes: "true"
+        claims:
+          preferredUsername: 
+          - preferred_username
+          - email
+          name: 
+          - nickname
+          - given_name
+          - name
+          email: 
+          - custom_email_claim
+          - email
+        issuer: https://sso-rh-sso.apps.<cluster url>/auth/realms/openshift
 ```
 
 For example, if you ONLY have Red Hat SSO, your OAuth resource might look like:
@@ -140,30 +140,30 @@ metadata:
   name: cluster
 spec:
   identityProviders:
-  - name: rhsso
-    mappingMethod: claim
-    type: OpenID
-    openID:
-      clientID: openshift
-      clientSecret: 
-        name: openid-client-secret
-      ca: 
-        name: openidcacrt
-      extraScopes: 
-      - email
-      - profile
-      extraAuthorizeParameters: 
-        include_granted_scopes: "true"
-      claims:
-        preferredUsername: 
-        - preferred_username
+    - name: rhsso
+      mappingMethod: claim
+      type: OpenID
+      openID:
+        clientID: openshift
+        clientSecret: 
+          name: openid-client-secret
+        ca: 
+          name: openidcacrt
+        extraScopes: 
         - email
-        name: 
-        - nickname
-        - given_name
-        - name
-        email: 
-        - custom_email_claim
-        - email
-      issuer: https://sso-rh-sso.apps.<cluster url>/auth/realms/openshift
+        - profile
+        extraAuthorizeParameters: 
+          include_granted_scopes: "true"
+        claims:
+          preferredUsername: 
+          - preferred_username
+          - email
+          name: 
+          - nickname
+          - given_name
+          - name
+          email: 
+          - custom_email_claim
+          - email
+        issuer: https://sso-rh-sso.apps.<cluster url>/auth/realms/openshift
 ```
