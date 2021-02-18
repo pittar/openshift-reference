@@ -63,3 +63,11 @@ oc set env dc/<dc name> key=value
 ```
 oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"routes":[{"name":"public-routes","hostname":"registry.apps.<cluster url>"}]}}' --type=merge
 ```
+
+## Trigger Rollout on a Deployment
+
+Triggering a rollout on a `Deployment` is slightly different than a `DeploymentConfig`:
+
+```
+oc rollout restart deployment <deployment name> -n <namespace>
+```
