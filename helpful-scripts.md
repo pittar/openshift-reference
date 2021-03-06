@@ -22,6 +22,13 @@ oc get $1 $2 -o yaml \
 ```
 
 Usage:
+
 ```
 oc-export service myapp > myapp-service.yaml
+```
+
+Or... if `oc-export` is on your path, it will be considered an `oc plugin`, so you can use it as if it were a native `oc` command!
+
+```
+oc export service myapp > myapp-service.yaml
 ```
