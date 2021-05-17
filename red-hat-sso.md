@@ -24,6 +24,13 @@ Next, install Red Hat SSO using the template.  You can do this through the GUI, 
 $ oc new-app --template=sso74-ocp4-x509-postgresql-persistent \
   -p SSO_ADMIN_USERNAME=admin \
   -p SSO_ADMIN_PASSWORD=password
+  
+# Once RH-SSO is fully started, remove the env vars for the admin user/pass.  This is so the 
+# admin user/pass doesn't get re-created on every pod start.  The original settings will be
+# persisted in the PostgreSQL database.
+
+oc set env dc/sso SSO_ADMIN_USERNAME-
+oc set env dc/sso SSO_ADMIN_PASSWORD-
 ```
 
 ### Create an OpenShift Realm and Client
