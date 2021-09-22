@@ -219,3 +219,11 @@ spec:
           - email
         issuer: https://sso-rh-sso.apps.<cluster url>/auth/realms/openshift
 ```
+
+That's it!  In a moment or two, OpenShift will cycle your authentication pods so the new settings will take effect.  You can check to see if this is done by running the following command to see if you have "new" pods (a minute or two old):
+
+```
+$ oc get pods -n openshift-authentication
+```
+
+Once they are done cycling, you can logout in order to see your new login option - **Log in with rhsso**
