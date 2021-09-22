@@ -1,6 +1,6 @@
 # Installing Red Hat SSO and Configuring OpenShift OAuth
 
-Red Hat Single Sign-On (RH-SSO) is based on the *upstream* [keycloak](https://www.keycloak.org/) and provides a powerful and flexible identity management solution.
+Red Hat Single Sign-On (RH-SSO) is based on the *upstream* [KeyCloak](https://www.keycloak.org/) project and provides a powerful and flexible identity management solution.
 Using RH-SSO to manage OpenShift Authentication can be a handy way to manage users and federate identity from your corporate LDAP, Active Directory, or any number of 
 identity providers that offer OpenID Connect or SAML2 interfaces.
 
