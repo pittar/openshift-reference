@@ -4,16 +4,61 @@ Red Hat Single Sign-On (RH-SSO) is based on the *upstream* [keycloak](https://ww
 Using RH-SSO to manage OpenShift Authentication can be a handy way to manage users and federate identity from your corporate LDAP, Active Directory, or any number of 
 identity providers that offer OpenID Connect or SAML2 interfaces.
 
-## Install Red Hat SSO 7.4 from the Template
+## Prerequsite: Confirm Templates Are Up To Date
 
-As of RH-SSO 7.4, the best installation method is with the template.  There is a RH-SSO Operator that is currently in alpha, but it isn't production ready yet.
+Login to your OpenShift cluster with the `oc` command line tool as a *Cluster Admin*.
+
+Run the following command to see if you already have the Red Hat Single Sign-On 7.5 templates in your cluster.
+
+```
+$ oc get template -n openshift | grep sso75
+```
+
+If not, then run the following commands to import them.
+
+```
+$ for resource in sso75-image-stream.json \
+  sso75-https.json \
+  sso75-postgresql.json \
+  sso75-postgresql-persistent.json \
+  sso75-x509-https.json \
+  sso75-x509-postgresql-persistent.json
+do
+  oc replace -n openshift --force -f \
+  https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso75-cpaas-dev/templates/${resource}
+done
+```
+
+Ignore any warnings along the lines of `Using non-groupfied API resources is deprecated and will be removed in a future release, update apiVersion to "template.openshift.io/v1" for your resource`.
+
+Finally, run the following command to import the Red Hat Single Sign-On 7.5 *ImageStream*.
+
+```
+$ oc -n openshift import-image rh-sso-7/sso75-openshift-rhel8:7.5 --from=registry.redhat.io/rh-sso-7/sso75-openshift-rhel8:7.5 --confirm
+```
+
+## Install Red Hat SSO 7.5 from the Template
+
+As of Red Hat Single Sign-On 7.5, the best installation method is with the template.  There is an Operator that is currently in *Tech Preview*, but it isn't production ready yet.
 
 ### Create a Project/Namespace
 
-First, create a new project for Red Hat SSO.  You can use whatever you like, but I'll use `rh-sso` in these docs.
+First, create a new project for Red Hat Single Sign-On.  You can use whatever you like, but I'll use `rh-sso` in these docs.
 
 ```
 $ oc new-project rh-sso
+```
+
+Also, if you plan on using the default PostgreSQL container available in the OpenShift catalog with this deployment, be sure the `10` tag exists.
+
+```
+$ oc get is -n openshift | grep postgresql
+```
+
+If not (for example, if you have `10-el8` instead), the simplest solution is to create the tag:
+
+```
+$ oc tag postgresql:10-el8 postgresql:10 -n openshift
 ```
 
 ### Install Red Hat SSO from the Template
@@ -21,7 +66,7 @@ $ oc new-project rh-sso
 Next, install Red Hat SSO using the template.  You can do this through the GUI, or the command line like so:
 
 ```
-$ oc new-app --template=sso74-ocp4-x509-postgresql-persistent \
+$ oc new-app --template=sso75-x509-postgresql-persistent \
   -p SSO_ADMIN_USERNAME=admin \
   -p SSO_ADMIN_PASSWORD=password
   
