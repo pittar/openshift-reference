@@ -227,3 +227,8 @@ $ oc get pods -n openshift-authentication
 ```
 
 Once they are done cycling, you can logout in order to see your new login option - **Log in with rhsso**
+
+## What About Users?
+
+If you want to use the internal user registry of Red Hat Single Sign-On, then make sure you add a few users to the "openshift" tenant!  You can also broker a corporate LDAP or Active Directory, or federate Identity with a 3rd party service like AzureAD, Google, GitHub, etc...
+
