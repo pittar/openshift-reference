@@ -68,5 +68,5 @@ Then, simply make the file executable and run it like so:
 chmod a+x new-project.sh
 
 # Create a new project.  It will also be able to pull images from cicd-tools.
-./new-project andrew-demo
+./new-project.sh andrew-demo
 ```
