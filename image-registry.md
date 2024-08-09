@@ -38,6 +38,7 @@ Then, set the storage:
 
 ```
 storage:
+  managementState: Managed
   pvc:
     claim: 
 ```
